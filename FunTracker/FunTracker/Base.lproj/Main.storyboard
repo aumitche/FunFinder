@@ -1,26 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="15A278b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9052" systemVersion="15A278b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jXh-45-UbA">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9040"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Main View Controller-->
+        <scene sceneID="IC4-75-19f">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FunTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jXh-45-UbA" customClass="MainViewController" customModule="FunTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="gki-BO-z3Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="GOP-Wo-90r"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="Wui-my-bDr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Heartbeat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acD-DY-Nby">
+                                <rect key="frame" x="235" y="559" width="42" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="G7z-5p-tGx">
+                                <rect key="frame" x="197" y="507" width="118" height="31"/>
+                                <animations/>
+                                <connections>
+                                    <action selector="heartBeatChanged:" destination="jXh-45-UbA" eventType="valueChanged" id="Hea-x4-Wp5"/>
+                                </connections>
+                            </slider>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b7L-ls-BxF" customClass="MapView" customModule="FunTracker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="600" height="443"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="b7L-ls-BxF" secondAttribute="height" multiplier="1:1.2" id="RZ9-7d-z9t"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="G7z-5p-tGx" firstAttribute="centerX" secondItem="Wui-my-bDr" secondAttribute="centerX" id="1xe-ap-sPR"/>
+                            <constraint firstItem="acD-DY-Nby" firstAttribute="top" secondItem="G7z-5p-tGx" secondAttribute="bottom" constant="22" id="GJI-eR-4vm"/>
+                            <constraint firstItem="acD-DY-Nby" firstAttribute="centerX" secondItem="Wui-my-bDr" secondAttribute="centerX" id="Kqb-wT-eQZ"/>
+                            <constraint firstItem="b7L-ls-BxF" firstAttribute="centerX" secondItem="Wui-my-bDr" secondAttribute="centerX" id="ekE-S2-tpI"/>
+                            <constraint firstItem="b7L-ls-BxF" firstAttribute="width" secondItem="Wui-my-bDr" secondAttribute="width" id="fgH-vP-rMd"/>
+                            <constraint firstItem="b7L-ls-BxF" firstAttribute="top" secondItem="gki-BO-z3Y" secondAttribute="bottom" id="koo-4q-AMu"/>
+                            <constraint firstItem="GOP-Wo-90r" firstAttribute="top" secondItem="G7z-5p-tGx" secondAttribute="bottom" constant="63" id="vP2-U0-VhM"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="heartBeatSlider" destination="G7z-5p-tGx" id="j2n-h9-zXl"/>
+                        <outlet property="mapView" destination="b7L-ls-BxF" id="yDU-DU-weA"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c2v-PT-WCO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="465" y="92"/>
         </scene>
     </scenes>
 </document>

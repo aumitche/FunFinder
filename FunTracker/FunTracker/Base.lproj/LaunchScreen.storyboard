@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="15A278b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9052" systemVersion="15A278b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9040"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -38,14 +39,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jjt-34-c4C">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="447"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Jjt-34-c4C" secondAttribute="height" multiplier="300:149" id="0e4-Je-n1l"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Jjt-34-c4C" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="C12-Ni-8jw"/>
                             <constraint firstItem="po1-M9-8Xc" firstAttribute="centerY" secondItem="rkH-Uw-7Kj" secondAttribute="centerY" id="DHd-lc-XMm"/>
                             <constraint firstItem="rkH-Uw-7Kj" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="FTS-pE-Cah"/>
                             <constraint firstItem="3qD-cf-taW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="HaY-kq-cFh"/>
+                            <constraint firstItem="Jjt-34-c4C" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="Jld-C1-d4v"/>
                             <constraint firstItem="rkH-Uw-7Kj" firstAttribute="centerY" secondItem="BML-h3-7RV" secondAttribute="centerY" id="NeK-VO-AsS"/>
+                            <constraint firstItem="Jjt-34-c4C" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="R9r-az-9Lj"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="3qD-cf-taW" secondAttribute="bottom" constant="43" id="eZE-MD-Hss"/>
                             <constraint firstItem="po1-M9-8Xc" firstAttribute="leading" secondItem="rkH-Uw-7Kj" secondAttribute="trailing" constant="13" id="jiV-yk-Q01"/>
                             <constraint firstItem="3qD-cf-taW" firstAttribute="top" secondItem="rkH-Uw-7Kj" secondAttribute="bottom" constant="34" id="q4r-yd-Bh9"/>

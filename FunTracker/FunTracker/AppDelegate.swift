@@ -7,13 +7,21 @@
 //
 
 import UIKit
+import SwiftHTTP
 
 //1. Add the ESTBeaconManagerDelegate protocol
+
+var beacons = [Beacon]()
+
+
+var ID:Int!
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate {
 
 	var window: UIWindow?
+    var data = ""
+    var received = false //A flag that is only raised when all data has been received from the server.
 
 	//2. Add a property to hold the beacon manager and instantiate it
 	let beaconManager = ESTBeaconManager()
@@ -23,29 +31,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ESTBeaconManagerDelegate 
 		//3. Set the beacon manager's delegate
 		self.beaconManager.delegate = self
 		self.beaconManager.requestAlwaysAuthorization()
+        
+        getBeaconLocations()
 		return true
 	}
+    
+    func getBeaconLocations() {
+        //First thing: contact the server for the pre-determined beacon locations.
+        let initialData = communicate("http://10.10.10.60/getInitInfo.php")
+        print("initialData = " + initialData)
+        processInfo(initialData)
+    }
+    
+    func communicate(url: String) -> String {
+        do {
+            let opt = try HTTP.GET(url as String)
+            opt.start { response in
+                if let err = response.error {
+                    print("error: \(err.localizedDescription)")
+                    return //also notify app of failure as needed
+                }
+                print("opt finished: \(response.description)")
+                print("\(response.data)") //access the response of the data with response.data
+                self.data = String(data: response.data, encoding: NSUTF8StringEncoding)!
+                print("communicate data = " + self.data)
+            }
+        } catch let error {
+            print("got an error creating the request: \(error)")
+        }
+        
+        //It can take some time for the data to arrive from the server. Poll the data until it is not empty.
+        var t = 0
+        while (received == false) {
+            t++
+            if (data != "") {
+                received = true
+            }
+            if (t % 1000000 == 0) {
+                print(t)
+            }
+        }
+        
+        return data
+    }
 
-	func applicationWillResignActive(application: UIApplication) {
-		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-		// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-	}
-
-	func applicationDidEnterBackground(application: UIApplication) {
-		// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-		// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-	}
-
-	func applicationWillEnterForeground(application: UIApplication) {
-		// Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-	}
-
-	func applicationDidBecomeActive(application: UIApplication) {
-		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-	}
-
-	func applicationWillTerminate(application: UIApplication) {
-		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-	}
+    func processInfo(data: String) {
+        let values = data.componentsSeparatedByString(",")
+        
+        //Each beacon has three properties: major, x, and y.
+        for (var i = 0; i < values.count - 1; i++) {
+            if (i % 3 == 0 && values.count - i > 3) {
+                let major = Int(values[i])
+                let x = Double(values[i + 1])
+                let y = Double(values[i + 2])
+                let beacon = Beacon(major: major!, x: x!, y: y!)
+                beacons.append(beacon)
+            }
+        }
+        ID = Int(values[values.count - 2])
+        print(ID)
+        _ = 0
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
